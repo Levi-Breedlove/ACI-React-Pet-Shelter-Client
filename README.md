@@ -364,11 +364,11 @@ Additional weekly logs will be added as the remaining project work is completed 
 
 ## Milestones
 
-- ✅ Developer Intermediate 2 pet shelter scenario reviewed
-- ✅ Repository reorganized into a docs-based archive structure
-- ✅ Architecture asset directory prepared
-- ✅ Architecture diagram added to `docs/images/`
-- ✅ Week 1 archive refreshed with a tested migration guide and setup workflow
-- ✅ Week 2 archive refreshed with tested migration guides, setup files, validation support, and course-aligned AWS deployment steps
+- [x] Developer Intermediate 2 pet shelter scenario reviewed
+- [x] Repository reorganized into a docs-based archive structure
+- [x] Architecture asset directory prepared
+- [x] Architecture diagram added to `docs/images/`
+- [x] Week 1 archive refreshed with a tested migration guide and setup workflow
+- [x] Week 2 archive refreshed with tested migration guides, setup files, validation support, and course-aligned AWS deployment steps
 - [ ] Additional weekly logs added
 - [ ] Later-stage backend and deployment work documented
