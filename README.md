@@ -28,17 +28,17 @@
 
 ## Overview
 
-This repository documents the **AnyCompany Pet Shelter** project work for **Developer Intermediate 2 Q2 2026**, where the goal is to design, build, test, and deploy AWS-based microservices while working through a React frontend and a serverless backend workflow.
+This repository documents the **AnyCompany Pet Shelter** project work for **Developer Intermediate 2 Q2 2026** and captures the currently completed build scope through the published Week 1 and Week 2 deliverables.
 
-The work preserved here begins with a standalone React frontend that uses local pet data, reusable UI components, client-side routing, and starter tests. In the current archived stage, the project expands into a serverless AWS-backed application by integrating the frontend with **Amazon API Gateway, AWS Lambda, Amazon DynamoDB, and Amazon S3**.
+The progress preserved here starts with a standalone React + Vite frontend that uses local pet data, reusable UI components, client-side routing, and starter tests, then advances into a serverless pets microservice backed by **Amazon API Gateway, AWS Lambda, Amazon DynamoDB, and Amazon S3**.
 
-At the current stage, this repository functions as the **documentation and packaged-deliverable record** for the project. The Week 1 and Week 2 application snapshots are preserved as archived zip packages and have not yet been expanded into the repository as live source code. Both published archives now include project-specific migration guides, setup notes, and course-aligned deployment walkthroughs for local use and personal AWS account deployment.
+The project is ultimately aiming to become a cloud-native pet shelter web application where users can browse adoptable pets through a static React frontend, retrieve live shelter inventory from AWS-backed microservices, and continue expanding into broader adoption-related workflows as later project work is completed. At the current stage, this repository functions as the **documentation and packaged-deliverable record** for that build progress. The Week 1 and Week 2 application snapshots are preserved as archived zip packages and have not yet been expanded into the repository as live source code.
 
 ---
 
 ## Repository Description
 
-Developer Intermediate 2 Q2 2026 project repository for documenting pet shelter progress, storing architecture assets, and preserving packaged Week 1 and Week 2 application snapshots.
+Developer Intermediate 2 Q2 2026 repository for documenting the AnyCompany Pet Shelter build, storing architecture assets, and preserving the packaged Week 1 frontend and Week 2 pets microservice snapshots that move the project toward a full AWS serverless application.
 
 ---
 
@@ -60,7 +60,7 @@ The initial archived version of the project uses a React frontend with hardcoded
 | Repository Type | Documentation and packaged phase artifacts |
 | Deployment Target | AWS serverless environment |
 | Application Type | React web application with serverless backend integration |
-| Current Focus | Week 1 and Week 2 archives refreshed, retested, and aligned to the current pet shelter course scope |
+| Current Focus | Week 1 and Week 2 archives refreshed, retested, and aligned |
 
 ---
 
