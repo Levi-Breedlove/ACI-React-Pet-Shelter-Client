@@ -2,7 +2,7 @@
 
 # ACI-React-Pet-Shelter-Client
 
-### Developer Intermediate 2 Q2 2026: Building a Serverless Pet Shelter Application with React and AWS
+### Building a Serverless Pet Shelter Application with React and AWS
 
 <p align="center">
   <img src="https://img.shields.io/badge/status-in_progress-2ea44f?style=flat-square" alt="Status Badge" />
