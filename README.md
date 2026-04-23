@@ -357,7 +357,7 @@ week-3-pet-shelter-client.zip
 ## Weekly Status Log
 
 <details>
-<summary><b>Week 1 / Module 1</b> - Developing on AWS</summary>
+<summary><b>Week 1</b> - Developing on AWS</summary>
 
 ### Lab Focus
 - Review the pet shelter MVP use case and React project structure
