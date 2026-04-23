@@ -38,12 +38,6 @@ The project is ultimately aiming to become a cloud-native pet shelter web applic
 
 ---
 
-## Repository Description
-
-ACI Developer Intermediate 2 Q2 2026 repository for documenting the AnyCompany Pet Shelter build, storing architecture assets, and preserving the packaged Week 1 frontend, Week 2 pets microservice, and Week 3 adoptions read-flow snapshots that move the project toward a full AWS serverless application.
-
----
-
 ## Client Scenario
 
 **AnyCompany Pet Shelter** is a newly formed non-profit that needs a web application where customers can browse pets available for adoption and begin the adoption process, while the development team follows AWS serverless and microservices best practices introduced in the course.
