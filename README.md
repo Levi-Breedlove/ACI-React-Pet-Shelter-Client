@@ -348,22 +348,22 @@ week-3-pet-shelter-client.zip
 
 ---
 
-## Weekly Status Log
+## Weekly Sprint Log
 
 <details>
-<summary><b>Week 1</b> - Developing on AWS</summary>
+<summary><b>Week 1</b> - Establish the Pet Shelter React Baseline</summary>
 
-### Lab Focus
-- Review the pet shelter MVP use case and React project structure
-- Create, validate, and test a basic React application
-- Build routed pages and reusable components
-- Display local pet data and add species filtering
+### Sprint Focus
+- Establish the standalone React application structure for the pet shelter scenario
+- Build routed pages and reusable UI components for browsing pets and adoption-related views
+- Display bundled local pet data with species filtering and shelter-day calculations
+- Package the baseline with starter tests, local setup support, and S3 website hosting guidance
 
 ### Status
 **Completed**
 
 ### Outcome
-The Week 1 snapshot contains a working React client with Home, About Us, Pets, Adopt, Application Info, and Applications views. The Pets page renders nine sample pets, supports dog and cat filtering, and calculates how long each pet has been in the shelter using a shared utility function.
+The Week 1 snapshot establishes the archived React baseline for the project. It includes Home, About Us, Pets, Adopt, Application Info, and Applications views, plus local pet data, species filtering, shelter-day calculations, starter tests, and packaged setup guidance.
 
 ### What Was Added
 - `src/App.jsx` — route-based application shell with local pet data
@@ -380,24 +380,24 @@ The Week 1 snapshot contains a working React client with Home, About Us, Pets, A
 | `utils.test.js` | 3 | `daysInShelter` behavior for same-day, 5-day, and 100-day cases |
 
 ### Summary
-Week 1 established the client-side foundation for the project in the context of the ACI Developer Intermediate 2 pet shelter scenario. The application was structured with React Router, reusable components, bundled local assets, and starter tests, creating a usable baseline for later AWS integration. The packaged archive has now also been refreshed with a tested local setup script, locked dependencies, and a phase-specific Amazon S3 website hosting guide.
+Week 1 established the client-side foundation for the pet shelter project. The archived package captures a routed React app with reusable components, bundled local assets, starter tests, locked dependencies, a tested setup script, and a phase-specific Amazon S3 website hosting guide that prepares the project for later AWS integration.
 
 </details>
 
 <details>
-<summary><b>Week 2</b> - Serverless Pets Service Integration</summary>
+<summary><b>Week 2</b> - Integrate the Serverless Pets Service</summary>
 
-### Lab Focus
-- Create a serverless backend with AWS SAM
-- Expose `GET /pets` through API Gateway and Lambda
-- Store pet records in DynamoDB and seed sample data
-- Move the pets listing from hardcoded data to live API-driven data
+### Sprint Focus
+- Add the serverless pets backend with AWS SAM, API Gateway, Lambda, and DynamoDB
+- Seed pet records and prepare public S3 image hosting for the pets experience
+- Move the pets listing from hardcoded data to live API-driven data with packaged fallback support
+- Package validation and deployment guidance so the archive can be reused in a personal AWS account
 
 ### Status
 **Completed**
 
 ### Outcome
-The Week 2 snapshot expands the project into a serverless full-stack application. A SAM template, Lambda handler, DynamoDB table setup, and S3 helper scripts were added, while the frontend was updated to fetch pet data from an API Gateway endpoint and build pet image URLs from an S3 bucket base URL.
+The Week 2 snapshot integrates the archived React client with a serverless pets service. It adds the SAM-defined backend, DynamoDB pet storage and seeding, S3 image bucket support, and frontend API-driven pet retrieval with fallback data for local verification.
 
 ### What Was Added
 - `backend/template.yaml` — defines API Gateway, Lambda, DynamoDB, CORS settings, and stack output for the pets endpoint
@@ -417,24 +417,24 @@ The Week 2 snapshot expands the project into a serverless full-stack application
 - The archived frontend includes `.env.example` and packaged fallback data so the UI can still be verified before AWS resources are deployed
 
 ### Summary
-Week 2 transitions the project from a static React client into an AWS-backed application. The main completed feature is live pet retrieval through API Gateway, Lambda, and DynamoDB, supported by S3-hosted pet images and a static frontend deployment path that matches the pet shelter course documentation. The packaged archive has also been refreshed with tested setup files, migration guidance, and validation coverage for use outside the original lab environment.
+Week 2 transitions the project from a static React client into an AWS-backed application. The archived package now supports live pet retrieval through API Gateway, Lambda, and DynamoDB, uses S3-hosted pet images, and includes the setup files, tests, fallback data, and migration guidance needed to validate and deploy the snapshot outside the original course lab environment.
 
 </details>
 
 <details>
-<summary><b>Week 3</b> - Adoptions Microservice Read Flow</summary>
+<summary><b>Week 3</b> - Add the Adoptions Read Flow</summary>
 
-### Lab Focus
-- Add read-only adoptions microservice routes with AWS SAM
-- Expose `GET /adoptions` and `GET /adoptions/{id}` through API Gateway and Lambda
-- Store adoption application records in DynamoDB and seed sample data
-- Connect the Applications and Application Detail views to live AWS-backed data
+### Sprint Focus
+- Add read-only adoptions routes with AWS SAM, API Gateway, Lambda, and DynamoDB
+- Seed adoption records and expose list and detail endpoints for archived package testing
+- Connect the Applications and Application Detail views to deployed APIs with fallback sample data
+- Package updated setup, validation, and deployment support for the expanded full-stack snapshot
 
 ### Status
 **Completed**
 
 ### Outcome
-The Week 3 snapshot expands the serverless backend beyond pets-only retrieval and introduces an adoptions read flow that matches the broader project architecture. The packaged frontend can now pull pets, adoption lists, and individual adoption details from deployed AWS APIs, while still falling back to bundled sample data when those AWS resources are not configured.
+The Week 3 snapshot expands the serverless backend beyond pets-only retrieval and adds the adoptions read flow. The packaged frontend can now load pets, adoption lists, and individual adoption details from deployed AWS APIs while still falling back to bundled sample data when those resources are not configured.
 
 ### What Was Added
 - `backend/template.yaml` — defines the Week 3 API Gateway routes, two DynamoDB tables, three Lambda functions, and CloudFormation outputs for the backend
@@ -454,11 +454,13 @@ The Week 3 snapshot expands the serverless backend beyond pets-only retrieval an
 - The packaged frontend still runs in fallback mode before AWS environment variables are configured
 
 ### Summary
-Week 3 moves the project closer to the course target architecture by adding the adoptions read flow while keeping the package practical for other users to run and deploy. The archive now reflects the same core architecture pattern used in the lab, while also using more reusable personal-account defaults such as SAM-managed permissions and on-demand DynamoDB billing. It also includes updated AWS deployment guidance grounded in the current SAM and S3 website hosting flow, along with validation support for both the frontend and backend.
+Week 3 moves the project closer to the course target architecture by extending the archive with adoptions list and detail reads, matching frontend integrations, and reusable backend validation support. The package preserves the same core API Gateway, Lambda, and DynamoDB pattern used in the course while also keeping the personal-account-friendly SAM defaults, deployment guidance, and fallback-friendly frontend workflow introduced in the refreshed archive.
 
 </details>
 
-Additional weekly logs will be added as the remaining project work is completed and documented beyond Week 3.
+<!-- Future sprint entries will be added here after completion.
+Keep upcoming sprint placeholders hidden from rendered README output until that work is actually completed and documented.
+-->
 
 ---
 
@@ -474,12 +476,9 @@ The current Week 3 package already aligns closely with the lab's completed serve
 
 ## Milestones
 
-- [x] ACI Developer Intermediate 2 pet shelter scenario reviewed
-- [x] Repository reorganized into a docs-based archive structure
-- [x] Architecture asset directory prepared
-- [x] Architecture diagram added to `docs/images/`
-- [x] Week 1 archive refreshed with a tested migration guide and setup workflow
-- [x] Week 2 archive refreshed with tested migration guides, setup files, validation support, and course-aligned AWS deployment steps
-- [x] Week 3 archive refreshed with a tested deployment guide, setup files, validation support, and adoptions read-flow packaging
-- [x] Weekly status log extended through Week 3
-- [ ] Later-stage backend and deployment work documented
+- [x] Archive structure prepared under `docs/phase-zips/`
+- [x] `week-1-pet-shelter-client.zip` completed with the React baseline, local setup workflow, starter tests, and Week 1 migration guide
+- [x] `week-2-pet-shelter-client.zip` completed with the pets API backend, frontend API integration, validation support, and Week 2 migration guide
+- [x] `week-3-pet-shelter-client.zip` completed with the pets and adoptions read APIs, frontend adoptions integration, validation support, and Week 3 migration guide
+- [x] Weekly sprint log aligned with the completed Week 1 through Week 3 zip coverage
+- [ ] Week 4 and later zip archives pending; no later-week package is currently preserved in `docs/phase-zips/`
