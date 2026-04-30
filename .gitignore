@@ -1,3 +1,8 @@
 .codex
 .scratch/
 .agents
+
+# Local Week 4 source artifacts used to build the cleaned archive.
+/week-4-pet-shelter-client.zip
+/Developer Intermediate 2_ Week 4_*.pdf
+/Final Pet Shelter Lab - POST Request Handling Serverless Applications Portfolio Blog Post.pdf
