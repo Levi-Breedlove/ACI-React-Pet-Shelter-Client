@@ -19,30 +19,38 @@
 </p>
 
 <p align="center">
-  <b>Current Phase:</b> Week 4 complete, with Week 1 through Week 4 pet shelter deliverables preserved, refreshed, retested, and documented while later course weeks are still pending
+  <b>Current Phase:</b> Week 5 complete - Cognito-secured employee application review
 </p>
 
 </div>
 
 ---
 
-## Overview
+## Contents
 
-This repository documents the **AnyCompany Pet Shelter** project work for **ACI Developer Intermediate 2 Q2 2026** and captures the currently completed build scope through the published Week 1, Week 2, Week 3, and Week 4 deliverables.
-
-The progress preserved here starts with a standalone React + Vite frontend that uses local pet data, reusable UI components, client-side routing, and starter tests, then advances into serverless pets and adoptions flows backed by **Amazon API Gateway, AWS Lambda, Amazon DynamoDB, and Amazon S3**.
-
-By the end of the current Week 4 package, the project matches the lab's core resource topology closely: a React client, API Gateway endpoints for pets and adoptions, dedicated Lambda handlers, separate `PetsTable` and `AdoptionsTable` resources, and AWS SAM-managed deployment. Week 4 extends the Week 3 read flows by adding `POST /adoptions`, request validation, DynamoDB writes, and frontend navigation to the created application detail page. Where the package differs from the lab environment, it favors personal-account-friendly improvements such as SAM-managed least-privilege policies, on-demand DynamoDB billing, clear CloudFormation outputs, and explicit migration notes for AWS resources the lab may have pre-created.
-
-The project is ultimately aiming to become a cloud-native pet shelter web application where users can browse adoptable pets through a static React frontend, retrieve live shelter inventory and adoption data from AWS-backed microservices, submit adoption applications, and continue expanding into broader adoption-related workflows as later project work is completed. At the current stage, this repository functions as the **documentation and packaged-deliverable record** for that build progress. The Week 1 through Week 4 application snapshots are preserved as archived zip packages and have not yet been expanded into the repository as live source code.
+- [Overview](#overview)
+- [Current Status](#current-status)
+- [Client Scenario](#client-scenario)
+- [Phase Progress](#phase-progress)
+- [Architecture Diagram](#architecture-diagram)
+- [Platform and Tooling](#platform-and-tooling)
+- [What This Project Demonstrates](#what-this-project-demonstrates)
+- [Using the Packages](#using-the-packages)
+- [Repository Structure](#repository-structure)
+- [Phase Package Contents](#phase-package-contents)
+- [Weekly Sprint Log](#weekly-sprint-log)
+- [Next Steps](#next-steps)
+- [Milestones](#milestones)
 
 ---
 
-## Client Scenario
+## Overview
 
-**AnyCompany Pet Shelter** is a newly formed non-profit that needs a web application where customers can browse pets available for adoption and begin the adoption process, while the development team follows AWS serverless and microservices best practices introduced in the course.
+This repository documents the **AnyCompany Pet Shelter** project for **ACI Developer Intermediate 2 Q2 2026**. It preserves the completed Week 1 through Week 5 course deliverables as packaged archives, along with the architecture notes, setup guidance, and sprint history needed to understand the project at each phase.
 
-The initial archived version of the project uses a React frontend with hardcoded pet and application data. The Week 2 archived deliverable moves the project toward a live AWS-backed workflow by retrieving pet data through API Gateway and Lambda, storing pet records in DynamoDB, and preparing pet images and static site hosting for Amazon S3. The Week 3 archived deliverable expands that flow with adoptions read APIs, an adoptions DynamoDB table, and frontend integration for applications and application details. The Week 4 archived deliverable adds POST request handling so the adoption form can submit new adoption applications through API Gateway, Lambda, and DynamoDB.
+The application starts as a standalone **React + Vite** frontend and progresses into a serverless AWS application backed by **Amazon API Gateway, AWS Lambda, Amazon DynamoDB, Amazon S3, and Amazon Cognito**. Public users can browse adoptable pets and submit adoption applications, while signed-in employees can review application records through Cognito-protected routes.
+
+At this stage, the root repository is the documentation and deliverable index. The runnable application source remains inside the weekly zip packages under `docs/phase-zips/`.
 
 ---
 
@@ -52,11 +60,31 @@ The initial archived version of the project uses a React frontend with hardcoded
 |----------|---------------|
 | Project Status | In Progress |
 | Course Track | ACI Developer Intermediate 2 Q2 2026 |
-| Archive Coverage | Week 1 through Week 4 preserved |
+| Archive Coverage | Week 1 through Week 5 |
 | Repository Type | Documentation and packaged phase artifacts |
-| Deployment Target | AWS serverless environment |
-| Application Type | React web application with serverless pets and adoptions read/create APIs |
-| Current Focus | Week 4 archive validated, AWS deployment guidance aligned, IAM/service setup gaps audited, and repo documentation rolled forward |
+| Current Package | `docs/phase-zips/week-5-pet-shelter-client.zip` |
+| Current Focus | Cognito employee sign-in, protected adoption reads, and Week 5 migration guidance |
+| Live Source Location | Inside the weekly zip archives, not expanded at the repository root |
+
+---
+
+## Client Scenario
+
+**AnyCompany Pet Shelter** is a newly formed non-profit that needs a web application where customers can browse pets available for adoption and begin the adoption process, while the development team follows AWS serverless and microservices best practices introduced in the course.
+
+The archived deliverables show that evolution step by step: Week 1 establishes the React client, Week 2 adds the pets service, Week 3 adds adoption reads, Week 4 adds adoption submissions, and Week 5 secures employee application review with Amazon Cognito.
+
+---
+
+## Phase Progress
+
+| Week | Package | Focus |
+|------|---------|-------|
+| Week 1 | `week-1-pet-shelter-client.zip` | React frontend baseline with local data and starter tests |
+| Week 2 | `week-2-pet-shelter-client.zip` | Serverless pets API with API Gateway, Lambda, DynamoDB, and S3 image support |
+| Week 3 | `week-3-pet-shelter-client.zip` | Adoptions read APIs and frontend application list/detail integration |
+| Week 4 | `week-4-pet-shelter-client.zip` | Adoption application submission through `POST /adoptions` |
+| Week 5 | `week-5-pet-shelter-client.zip` | Cognito employee authentication and protected adoption review routes |
 
 ---
 
@@ -68,35 +96,30 @@ This project follows the broader pet shelter target architecture introduced in t
   <img src="docs/images/pet-shelter-architecture.png" alt="Pet Shelter App AWS Architecture Diagram" width="100%" />
 </p>
 
-**Architecture flow**  
-`User → Amazon S3-hosted React web application → Amazon API Gateway`  
-`Amazon API Gateway → Pets and Adoptions microservices → AWS Lambda functions → Amazon DynamoDB tables`  
-`Core flows → list pets, list adoptions, view adoption details, and submit adoption applications`
+**Architecture flow**<br>
+`User → Amazon S3-hosted React web application → Amazon API Gateway`<br>
+`Amazon API Gateway → Pets and Adoptions microservices → AWS Lambda functions → Amazon DynamoDB tables`<br>
+`Employee authentication → Amazon Cognito hosted UI → protected adoption read routes`<br>
+`Core flows → list pets, submit adoption applications, and review adoption records after employee sign-in`
 
-> This diagram represents the higher-level target architecture for the pet shelter project. The archived Week 1 through Week 4 packages preserved in this repository capture implementation milestones within that broader direction, with the Week 4 archive now matching the lab's core API Gateway, Lambda, DynamoDB, and React application shape while adding POST request handling for adoption applications. The architecture image remains accurate at the service level, but the README and Week 4 guide now document the important IAM and service-to-service requirements for DynamoDB reads, DynamoDB writes, API Gateway invocation, CORS, and CloudWatch Logs.
+> This diagram represents the higher-level target architecture for the pet shelter project. The archived Week 1 through Week 5 packages preserved in this repository capture implementation milestones within that broader direction, with the Week 5 archive now adding Cognito-backed employee authentication on top of the existing API Gateway, Lambda, DynamoDB, S3, and React application shape. The architecture image remains accurate at the service level, while the README and Week 5 guide document the important IAM, API Gateway authorizer, Cognito callback/logout URL, CORS, DynamoDB, and CloudWatch Logs requirements.
 
 ---
 
 ## Platform and Tooling
-
-<table>
-  <tr>
-    <td valign="top" width="50%">
 
 ### AWS Services in Scope
 
 | Service | Purpose |
 |---------|---------|
 | Amazon S3 | Hosts the static frontend and the pet image objects used by the Pets and Applications pages |
-| Amazon API Gateway | Exposes the `GET /pets`, `GET /adoptions`, `GET /adoptions/{id}`, and `POST /adoptions` routes |
-| AWS Lambda | Runs the pets/adoptions read handlers and the Week 4 create-adoption handler |
+| Amazon API Gateway | Exposes the `GET /pets`, `GET /adoptions`, `GET /adoptions/{id}`, and `POST /adoptions` routes, with Cognito authorization applied to employee adoption reads |
+| AWS Lambda | Runs the pets/adoptions read handlers and the create-adoption handler |
 | Amazon DynamoDB | Stores pet records and adoption application records in separate tables |
+| Amazon Cognito | Provides employee hosted UI sign-in, token issuance, and sign-out support for protected application review pages |
 | AWS SAM / CloudFormation | Defines and deploys the backend infrastructure |
-| IAM | Supports Lambda execution, DynamoDB read/write, and API Gateway invoke permissions |
+| IAM | Supports Lambda execution, DynamoDB read/write, API Gateway authorization setup, and role pass-through during deployment |
 | Amazon CloudWatch Logs | Captures Lambda runtime logs for deployment and permission troubleshooting |
-
-  </td>
-  <td valign="top" width="50%">
 
 ### Tech Stack
 
@@ -111,55 +134,33 @@ This project follows the broader pet shelter target architecture introduced in t
 | Storage / Data | Amazon S3, Amazon DynamoDB |
 | Tooling | ESLint, npm, pip, AWS CLI, AWS SAM CLI |
 
-  </td>
-  </tr>
-</table>
+---
+
+## What This Project Demonstrates
+
+The archived work demonstrates a staged move from a local React app to a serverless AWS application:
+
+- React routing, reusable UI components, pet filtering, adoption forms, and application review pages
+- API Gateway and Lambda integrations for pets, adoptions, adoption details, and adoption creation
+- DynamoDB table usage for pet and adoption records, plus seed scripts for reusable setup
+- S3-backed static hosting and image delivery considerations
+- Cognito hosted UI authentication for employee-only application review workflows
+- AWS SAM deployment packaging, migration guides, validation scripts, and IAM/service audit notes
 
 ---
 
-## Project Scope and What This Project Demonstrates
+## Using the Packages
 
-This project is designed to move a pet shelter application from a local mock-data frontend toward an AWS-integrated microservices architecture while building practical experience across React foundations, API integration, serverless infrastructure, testing, and packaged project documentation.
+This repository intentionally keeps the weekly deliverables packaged instead of expanding every app snapshot into the root directory. Each zip is a point-in-time course milestone that can be extracted, validated, deployed, or used as a backup reference.
 
-Through the work currently preserved in this repository, the project demonstrates:
+Use the migration guide inside each archive for setup and deployment details. For the current sprint, start with `phase-5-aws-migration-guide.md` inside `week-5-pet-shelter-client.zip`.
 
-- building a multi-page React client for a pet shelter use case
-- analyzing a React application structure in the context of a microservices design course
-- displaying and filtering adoptable pets by species
-- calculating time in shelter from intake dates
-- creating adoption-related UI flows and supporting pages
-- writing starter frontend tests for rendering and utility logic
-- preparing a static frontend for Amazon S3 website hosting
-- replacing hardcoded pet data with live API retrieval
-- adding read-only adoptions API flows for applications and application detail views
-- adding POST request handling for adoption application submissions
-- validating adoption create payloads and writing application records to DynamoDB
-- defining serverless backend resources with AWS SAM
-- seeding DynamoDB data for both pets and adoptions records and preparing S3-hosted image delivery
-- auditing lab-provided AWS assumptions for IAM roles, API Gateway integrations, CORS, CloudWatch Logs, DynamoDB access, S3 image hosting, and deployment outputs
-- packaging tested migration guides and local setup workflows for handoff use
-- preserving milestone snapshots as packaged deliverables
+### Package Workflow
 
----
-
-## Phase Guide and Package Notes
-
-This repository currently serves as the documentation and packaging layer for the project rather than the live application source itself.
-
-At this stage, the repository contains:
-
-- project documentation
-- architecture image assets used in the README
-- packaged **Week 1**, **Week 2**, **Week 3**, and **Week 4** application snapshots stored as zip archives under `docs/phase-zips/`
-- refreshed migration guides, setup files, and validation support inside the archived packages
-- package-level AWS deployment instructions and local setup support files for the archived milestones
-- documentation aligned to the current pet shelter project scope rather than the unrelated appointments example
-
-The live project files for all archived weeks are preserved inside the zip packages and are not yet extracted into the root repository as active source code.
-
-This approach keeps the repository clean while still preserving the project deliverables, architecture assets, and the current state of work completed so far.
-
-Each zip package acts as a point-in-time snapshot of the application and can be used for reference, backup, migration, or later extraction into a live working codebase.
+1. Extract the week package you want to inspect or run.
+2. Read that package's `phase-*-aws-migration-guide.md`.
+3. Run the package's `setup.sh` when available.
+4. Configure AWS, Cognito, S3, and frontend `.env` values for your own target account before deployment.
 
 ---
 
@@ -168,19 +169,22 @@ Each zip package acts as a point-in-time snapshot of the application and can be 
 ```bash
 .
 ├── docs/                                      # Project documentation and supporting assets
-│   ├── images/                                # Images used in documentation and README
+│   ├── images/                                # Images used by documentation and README
 │   │   └── pet-shelter-architecture.png       # Architecture diagram for the project
 │   └── phase-zips/                            # Archived project deliverables
 │       ├── week-1-pet-shelter-client.zip      # Week 1 packaged React frontend snapshot
 │       ├── week-2-pet-shelter-client.zip      # Week 2 packaged frontend + pets backend snapshot
 │       ├── week-3-pet-shelter-client.zip      # Week 3 packaged frontend + pets/adoptions backend snapshot
-│       └── week-4-pet-shelter-client.zip      # Week 4 packaged POST request handling snapshot
+│       ├── week-4-pet-shelter-client.zip      # Week 4 packaged POST request handling snapshot
+│       └── week-5-pet-shelter-client.zip      # Week 5 packaged Cognito authentication snapshot
 └── README.md                                  # Project overview, architecture, and status tracking
 ```
 
 ---
 
 ## Phase Package Contents
+
+The package trees below are intentionally collapsed so the README stays readable while still preserving the exact contents of each weekly deliverable.
 
 <details>
 <summary><b>Week 1 Package Contents</b></summary>
@@ -409,7 +413,7 @@ week-4-pet-shelter-client.zip
 
 ### Structure Notes
 
-- **`week-4-pet-shelter-client.zip`** contains the latest archived full-stack snapshot currently preserved in the repository.
+- **`week-4-pet-shelter-client.zip`** contains the Week 4 archived full-stack snapshot for adoption application creation.
 - `backend/template.yaml` defines two DynamoDB tables, four Lambda handlers, and API Gateway routes for `GET /pets`, `GET /adoptions`, `GET /adoptions/{id}`, and `POST /adoptions`.
 - `CreateAdoptionLambda` validates `applicant_name`, `email`, `phone`, and a non-empty `pets` array, generates an application `id`, adds `submitted_at`, writes to `AdoptionsTable`, and returns `201` with the created item.
 - The SAM template uses `DynamoDBReadPolicy` for read handlers and `DynamoDBWritePolicy` scoped to `AdoptionsTable` for the create handler.
@@ -418,6 +422,80 @@ week-4-pet-shelter-client.zip
 - The frontend submit flow requires a deployed Week 4 API because `POST /adoptions` writes to DynamoDB.
 - `phase-4-aws-migration-guide.md` documents local setup, SAM deployment, stack output lookup, frontend `.env` connection steps, API smoke tests, teardown, troubleshooting, known limitations, and an IAM/service setup audit.
 - The cleaned archive excludes `.env`, `node_modules`, `dist`, `.aws-sam`, `.venv`, Python cache files, logs, credentials, and private keys.
+
+</details>
+
+<details>
+<summary><b>Week 5 Package Contents</b></summary>
+
+The archived Week 5 application package contains the React client with Cognito employee sign-in support, the existing serverless backend for pets and adoptions, and a Week 5 migration guide covering Cognito setup, API Gateway authorizers, protected route validation, and IAM/service audit steps for a personal AWS account.
+
+```bash
+week-5-pet-shelter-client.zip
+├── backend/
+│   ├── handlers/
+│   │   ├── get_pets/
+│   │   │   └── getPets.py               # Lambda handler for GET /pets
+│   │   ├── get_adoptions/
+│   │   │   └── getAdoptions.py          # Lambda handler for GET /adoptions
+│   │   ├── get_adoption/
+│   │   │   └── getAdoption.py           # Lambda handler for GET /adoptions/{id}
+│   │   └── create_adoption/
+│   │       └── createAdoption.py        # Lambda handler for POST /adoptions
+│   ├── scripts/
+│   │   ├── populate_pets_table.py       # Seeds the deployed pets table
+│   │   ├── populate_adoptions_table.py  # Seeds the deployed adoptions table
+│   │   ├── adoptions.json               # Sample adoptions data used by the seed script
+│   │   ├── postDataTestPayload.json     # Sample payload for POST /adoptions smoke tests
+│   │   └── create_images_bucket.py      # Creates and configures the public-read images bucket
+│   ├── template.yaml                    # AWS SAM template for API Gateway, Lambda, DynamoDB, and CORS
+│   └── samconfig.toml                   # SAM deploy defaults for the packaged lab/session stack
+├── pet-shelter-client/
+│   ├── .env                             # Session-specific API, S3 image, Cognito, client, and redirect settings
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Header.jsx               # Conditional employee Applications navigation
+│   │   │   ├── Applications.jsx         # Sends bearer token to GET /adoptions
+│   │   │   ├── ApplicationDetail.jsx    # Sends bearer token to GET /adoptions/{id}
+│   │   │   ├── AdoptionForm.jsx         # Public POST /adoptions submission flow
+│   │   │   ├── AboutUs.jsx
+│   │   │   ├── Home.jsx
+│   │   │   ├── Pets.jsx
+│   │   │   └── Footer.jsx
+│   │   ├── assets/                      # Local image assets bundled with the archive
+│   │   ├── App.jsx                      # Cognito hosted UI sign-in/sign-out, token handling, and route setup
+│   │   ├── styles.css                   # Main styling
+│   │   ├── main.jsx                     # App bootstrap
+│   │   └── index.css                    # Global styles
+│   ├── public/
+│   │   ├── logo.png
+│   │   └── vite.svg
+│   ├── .eslintrc.cjs                    # ESLint configuration
+│   ├── .gitignore                       # Excludes node_modules and build artifacts
+│   ├── README.md                        # Frontend-specific package notes
+│   ├── index.html
+│   ├── package.json                     # Frontend dependencies including Axios and React Router
+│   ├── package-lock.json
+│   └── vite.config.js                   # Vite config using the lab preview base path
+├── phase-5-aws-migration-guide.md       # Week 5 setup, Cognito, authorizer, validation, and audit guide
+├── requirements-dev.txt                 # Python validation dependencies including cfn-lint support
+├── requirements.txt                     # Python runtime dependencies for backend scripts
+└── setup.sh                             # One-command local setup and validation workflow
+```
+
+### Structure Notes
+
+- **`week-5-pet-shelter-client.zip`** contains the current archived sprint package for Cognito authentication.
+- Week 5 builds on the existing Week 4 pets and adoptions backend rather than adding new Lambda routes.
+- The React client uses `VITE_COGNITO_AUTH_URL`, `VITE_CLIENT_ID`, and `VITE_REDIRECT_URI` to build Cognito hosted UI login/logout URLs.
+- `App.jsx` captures the returned Cognito token from the URL hash, stores it in `localStorage`, tracks signed-in state, and shows employee sign-in/sign-out controls.
+- `Header.jsx` only shows the `Applications` navigation link when an employee is signed in.
+- `Applications.jsx` and `ApplicationDetail.jsx` send `Authorization: Bearer <token>` headers to the adoption read endpoints.
+- `GET /pets` and `POST /adoptions` remain public flows so visitors can browse pets and submit adoption applications.
+- The Week 5 guide documents the manual Cognito user pool, hosted UI domain, app client, callback/logout URL, employee user, and API Gateway authorizer setup needed outside the AWS Training lab.
+- The API Gateway Cognito authorizer is documented as a post-deployment setup step for `GET /adoptions` and `GET /adoptions/{id}`; it is not currently defined inside `backend/template.yaml`.
+- `backend/template.yaml` still references the fixed Lambda execution role `LambdaApplicationRoleSam`, so the guide explains either creating that role or updating the template before deployment.
+- `pet-shelter-client/.env` is packaged with session-specific endpoint and Cognito values. Replace those values before reusing the archive in another AWS account and keep private data out of frontend source and environment files.
 
 </details>
 
@@ -568,6 +646,42 @@ Week 4 turns the adoptions workflow from read-only into a create-capable serverl
 
 </details>
 
+<details>
+<summary><b>Week 5</b> - Secure Employee Application Review with Amazon Cognito</summary>
+
+### Sprint Focus
+- Add Amazon Cognito employee authentication to the React client
+- Configure hosted UI sign-in/sign-out values through Vite environment variables
+- Hide employee-only navigation until a user signs in
+- Send Cognito bearer tokens to protected adoption read endpoints
+- Document API Gateway Cognito authorizer setup, callback/logout URL matching, validation checks, and IAM/service audit steps
+
+### Status
+**Completed**
+
+### Outcome
+The Week 5 snapshot secures the employee-facing application review workflow. Public visitors can still browse pets and submit adoption applications, while signed-in employees can access the Applications navigation and send authenticated requests to the adoption list and adoption detail APIs.
+
+### What Was Added
+- `pet-shelter-client/src/App.jsx` — Cognito hosted UI login/logout URL construction, token capture from the URL hash, local token storage, and signed-in state handling
+- `pet-shelter-client/src/components/Header.jsx` — conditional `Applications` navigation for signed-in employees
+- `pet-shelter-client/src/components/Applications.jsx` — bearer-token request headers for `GET /adoptions`
+- `pet-shelter-client/src/components/ApplicationDetail.jsx` — sign-in guard plus bearer-token request headers for `GET /adoptions/{id}`
+- `pet-shelter-client/.env` — session-specific API Gateway, S3 image, Cognito hosted UI, client ID, and redirect URI configuration values
+- `phase-5-aws-migration-guide.md` — personal-account setup guide for backend deployment, S3 images, DynamoDB seeding, Cognito hosted UI, API Gateway authorizers, validation, troubleshooting, and production hardening
+- `setup.sh`, `requirements.txt`, and `requirements-dev.txt` — packaged local setup and validation support for backend syntax/template checks and frontend lint/build checks
+
+### What Was Verified
+- The Week 5 archive contains the Cognito-aware frontend files, backend SAM template, setup script, requirements files, and Week 5 migration guide
+- The packaged setup workflow validates backend Python syntax, checks the SAM/CloudFormation template with `cfn-lint`, optionally runs `sam validate --lint` when SAM CLI is installed, and runs frontend lint/build
+- The Week 5 guide includes expected signed-out and signed-in frontend behavior, protected API checks, CloudFormation/DynamoDB/Lambda/API Gateway/Cognito/S3 console checks, and common troubleshooting paths
+- Live Cognito hosted UI and API Gateway authorizer validation must be rerun in the target AWS account because those values depend on the deployed account, Region, frontend URL, and Cognito app client
+
+### Summary
+Week 5 adds the security layer for employee-only adoption review. The archive now preserves Cognito login/logout wiring in the React client, token-bearing adoption read requests, conditional employee navigation, and a migration guide that explains which Cognito and API Gateway authorizer pieces must be created manually when moving out of the lab preset.
+
+</details>
+
 <!-- Future sprint entries will be added here after completion.
 Keep upcoming sprint placeholders hidden from rendered README output until that work is actually completed and documented.
 -->
@@ -576,17 +690,18 @@ Keep upcoming sprint placeholders hidden from rendered README output until that 
 
 ## Next Steps
 
-The current Week 4 package now covers the completed pet shelter read/create flow for pets and adoption applications. The main remaining follow-up work is focused on real AWS deployment validation, production hardening, and later-course feature expansion rather than reshaping the Week 4 archive.
+The current Week 5 package now covers the completed pet shelter read/create flow plus Cognito-protected employee application review. The main remaining follow-up work is focused on target-account validation, production hardening, and later-course feature expansion rather than reshaping the Week 5 archive.
 
-- Deploy the Week 4 SAM backend in a personal AWS account, seed DynamoDB, update the frontend `.env` with the `PetsAPIBaseUrl` stack output, and run the documented API smoke tests.
-- Review IAM with least-privilege tooling before public deployment, including IAM Access Analyzer and a manual check of the SAM-generated Lambda roles.
-- Replace learning-friendly wildcard CORS with the deployed frontend origin before exposing the API publicly.
-- Add CloudWatch Logs review, structured logging, deployment smoke tests, and CloudWatch alarms for Lambda/API Gateway errors.
+- Deploy the Week 5 backend in the target AWS account, seed DynamoDB, create the Cognito user pool/app client/domain, attach the API Gateway Cognito authorizer to `GET /adoptions` and `GET /adoptions/{id}`, redeploy the API stage, and run the documented signed-in/signed-out checks.
+- Replace the packaged session-specific `.env` values when reusing the archive in another account or URL, and keep private data, secrets, and personally identifiable information out of frontend source files.
+- Move Cognito user pool, app client, hosted UI domain, API Gateway authorizer, and method authorization settings into SAM/CloudFormation so the Week 5 environment can be recreated consistently.
+- Review the fixed `LambdaApplicationRoleSam` role with least-privilege tooling, including IAM Access Analyzer and a manual check of DynamoDB and CloudWatch Logs permissions.
+- Replace learning-friendly wildcard CORS with the deployed frontend origin while keeping the `Authorization` header allowed for protected adoption reads.
+- For production, replace the lab-compatible implicit grant with Authorization Code with PKCE for the browser client.
+- Add CloudWatch Logs review, structured logging, deployment smoke tests, and CloudWatch alarms for Lambda/API Gateway errors and Cognito-related authorization failures.
 - Host production frontend builds with CloudFront plus private S3 origin access control, then add Route 53 and an ACM TLS certificate if a custom domain is needed.
-- Add CI/CD with GitHub Actions for frontend lint/build, backend unit tests, SAM validation/build, and deployment smoke tests.
-- Separate dev, staging, and production environments with distinct SAM parameters, stack names, DynamoDB tables, S3 buckets, and budgets.
-- Add AWS Budgets for cost controls and use CloudFormation drift detection after manual AWS console changes.
-- Consider Cognito authentication, AWS WAF, tighter S3 bucket policies, and integration tests when the app moves beyond a course portfolio deployment.
+- Add CI/CD with GitHub Actions for frontend lint/build, backend syntax/template validation, SAM validation/build, and deployment smoke tests.
+- Separate dev, staging, and production environments with distinct SAM parameters, stack names, DynamoDB tables, S3 buckets, Cognito pools, and budgets.
 
 ---
 
@@ -597,5 +712,6 @@ The current Week 4 package now covers the completed pet shelter read/create flow
 - [x] `week-2-pet-shelter-client.zip` completed with the pets API backend, frontend API integration, validation support, and Week 2 migration guide
 - [x] `week-3-pet-shelter-client.zip` completed with the pets and adoptions read APIs, frontend adoptions integration, validation support, and Week 3 migration guide
 - [x] `week-4-pet-shelter-client.zip` completed with POST request handling, frontend create integration, validation support, Week 4 migration guide, and IAM/service setup audit
-- [x] Weekly sprint log aligned with the completed Week 1 through Week 4 zip coverage
-- [ ] Week 5 and later zip archives pending; no later-week package is currently preserved in `docs/phase-zips/`
+- [x] `week-5-pet-shelter-client.zip` completed with Cognito employee authentication, protected adoption read requests, Week 5 migration guidance, and IAM/service setup audit notes
+- [x] Weekly sprint log aligned with the completed Week 1 through Week 5 zip coverage
+- [ ] Week 6 and later zip archives pending; no Week 6 package is currently preserved in `docs/phase-zips/`
