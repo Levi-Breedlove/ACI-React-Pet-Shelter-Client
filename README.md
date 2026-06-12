@@ -69,8 +69,8 @@ The archived deliverables show that evolution step by step: Week 1 establishes t
 | Course Track | ACI Developer Intermediate 2 Q2 2026 |
 | Archive Coverage | Week 1 through Week 7 |
 | Repository Type | Documentation and packaged phase artifacts |
-| Current Package | `docs/phase-zips/week-7-pet-shelter-client.zip` |
-| Current Focus | X-Ray tracing, CloudWatch-friendly logging, Step Functions retry behavior, and production-near archive cleanup |
+| Current Packages | `docs/phase-zips/week-7-pet-shelter-client-lab.zip` for finalized lab status; `docs/phase-zips/week-7-pet-shelter-client.zip` for production migration |
+| Current Focus | Preserve the finalized lab archive unchanged while using the non-lab Week 7 zip for production-near migration and hardening |
 | Live Source Location | Inside the weekly zip archives, not expanded at the repository root |
 | Next Planned Phase | Target-account validation, production hardening, monitoring alarms, and deployment refinements |
 
@@ -156,7 +156,8 @@ The archived work demonstrates a staged move from a local React app to a serverl
 │       ├── week-4-pet-shelter-client.zip      # Week 4 packaged POST request handling snapshot
 │       ├── week-5-pet-shelter-client.zip      # Week 5 packaged Cognito authentication snapshot
 │       ├── week-6-pet-shelter-client.zip      # Week 6 packaged reporting microservice snapshot
-│       └── week-7-pet-shelter-client.zip      # Week 7 packaged X-Ray observability snapshot
+│       ├── week-7-pet-shelter-client-lab.zip  # Week 7 finalized lab-status archive; do not edit
+│       └── week-7-pet-shelter-client.zip      # Week 7 production migration archive
 └── README.md                                  # Project overview, architecture, and status tracking
 ```
 
@@ -172,19 +173,20 @@ The archived work demonstrates a staged move from a local React app to a serverl
 | Week 4 | `week-4-pet-shelter-client.zip` | Adoption application submission through `POST /adoptions` | Complete |
 | Week 5 | `week-5-pet-shelter-client.zip` | Cognito employee authentication and protected adoption review routes | Complete |
 | Week 6 | `week-6-pet-shelter-client.zip` | Reporting microservice with Step Functions, report-generation Lambdas, S3 report output, and SNS email notification | Complete |
-| Week 7 | `week-7-pet-shelter-client.zip` | X-Ray tracing, CloudWatch-friendly logging, Step Functions retry behavior, IaC-managed observability, and cleaned final archive | Complete |
+| Week 7 | `week-7-pet-shelter-client-lab.zip` and `week-7-pet-shelter-client.zip` | Final lab-status archive plus production migration archive with X-Ray tracing, CloudWatch-friendly logging, Step Functions retry behavior, and IaC-managed observability | Complete |
 
 ---
 
-## Week 7 Final Package
+## Week 7 Final Packages
 
-Week 7 is the current final archive for this repository. It preserves the lab-complete X-Ray observability implementation while cleaning the package tree for reuse outside the temporary lab workspace.
+Week 7 is delivered as two separate final zip packages because the completed lab state and the production migration path have different responsibilities.
 
 | Package | Intended Use | What It Preserves or Changes |
 |---------|--------------|-------------------------------|
-| `docs/phase-zips/week-7-pet-shelter-client.zip` | Production-near final review and own-account migration starting point | Preserves the Week 6 reporting workflow, adds SAM-managed X-Ray tracing for API Gateway, Lambda, and Step Functions, adds CloudWatch-friendly logging, includes `phase-7-aws-migration-guide.md`, replaces session `.env` with `.env.example`, and excludes generated `node_modules` and `.aws-sam` artifacts |
+| `docs/phase-zips/week-7-pet-shelter-client-lab.zip` | Finalized AWS lab status archive | Preserves the completed Week 7 lab deliverable exactly as the project reached final lab status. This archive is immutable for this repository and should not be edited, repackaged, or used as the production migration workspace. |
+| `docs/phase-zips/week-7-pet-shelter-client.zip` | Production-near own-account migration package | Preserves the Week 6 reporting workflow, adds SAM-managed X-Ray tracing for API Gateway, Lambda, and Step Functions, adds CloudWatch-friendly logging, includes `phase-7-aws-migration-guide.md`, replaces session `.env` with `.env.example`, and excludes generated `node_modules` and `.aws-sam` artifacts. Use this package for production migration updates and hardening. |
 
-The Week 6 archive remains available as the reporting lab snapshot, but Week 7 is the README reference point for final architecture, observability, and migration guidance.
+The Week 6 archive remains available as the reporting lab snapshot. The Week 7 lab zip is the frozen lab-complete record, while the non-lab Week 7 zip is the production migration path.
 
 ---
 
@@ -569,7 +571,7 @@ week-6-pet-shelter-client.zip
 <details>
 <summary><b>Week 7 Package Contents</b></summary>
 
-The archived Week 7 application package captures the final observability lab state for the pet shelter application. It starts from the Week 6 reporting workflow and adds CloudWatch/X-Ray observability changes in infrastructure as code, Step Functions retry behavior, trace-friendly logging, and a cleaner reusable package tree.
+The archived Week 7 production package captures the production-near observability migration path for the pet shelter application. It starts from the Week 6 reporting workflow and adds CloudWatch/X-Ray observability changes in infrastructure as code, Step Functions retry behavior, trace-friendly logging, and a cleaner reusable package tree.
 
 ```bash
 week-7-pet-shelter-client.zip
@@ -618,7 +620,8 @@ week-7-pet-shelter-client.zip
 
 ### Structure Notes
 
-- **`week-7-pet-shelter-client.zip`** is the current production-near final archive for this repository.
+- **`week-7-pet-shelter-client-lab.zip`** is the frozen final lab-status archive. Preserve it exactly as-is and do not edit, rebuild, or repurpose it for production migration work.
+- **`week-7-pet-shelter-client.zip`** is the current production-near migration archive for this repository.
 - `backend/template.yaml` enables active Lambda tracing through SAM `Globals.Function.Tracing`, API Gateway stage tracing with `TracingEnabled: true`, and Step Functions tracing with `Tracing.Enabled: true`.
 - The template adds IaC-managed X-Ray permissions for `LambdaApplicationRoleSam` and IaC-managed report object access for the generated `report.html` object.
 - `backend/statemachine/report_generation.asl.json` adds retry behavior around `GenerateHTML` with `States.ALL`, `IntervalSeconds: 5`, `MaxAttempts: 3`, and `BackoffRate: 2.0`.
@@ -633,9 +636,15 @@ week-7-pet-shelter-client.zip
 
 This repository intentionally keeps the weekly deliverables packaged instead of expanding every app snapshot into the root directory. Each zip is a point-in-time course milestone that can be extracted, validated, deployed, or used as a backup reference.
 
-Use the migration guide inside each archive for setup and deployment details. For the current sprint, start with `phase-7-aws-migration-guide.md` inside `week-7-pet-shelter-client.zip`, and refer back to `phase-5-aws-migration-guide.md` when validating the Cognito baseline that Week 7 builds on.
+Use the migration guide inside each archive for setup and deployment details. For production migration work, start with `phase-7-aws-migration-guide.md` inside `week-7-pet-shelter-client.zip`, and refer back to `phase-5-aws-migration-guide.md` when validating the Cognito baseline that Week 7 builds on.
 
-Inspect the current package:
+Inspect the finalized lab package as a read-only record:
+
+```bash
+unzip -l docs/phase-zips/week-7-pet-shelter-client-lab.zip
+```
+
+Inspect the production migration package:
 
 ```bash
 unzip -l docs/phase-zips/week-7-pet-shelter-client.zip
@@ -656,12 +665,13 @@ unzip docs/phase-zips/week-7-pet-shelter-client.zip -d /tmp/pet-shelter-week-7
 
 Package workflow:
 
-1. Extract the week package you want to inspect or run.
+1. Use `week-7-pet-shelter-client-lab.zip` only for read-only review of the finalized lab status.
 2. Read that package's `phase-*-aws-migration-guide.md`.
-3. Run the package's `setup.sh` when available.
-4. Configure AWS, Cognito, S3, Step Functions, SNS, X-Ray, and frontend `.env` values for your own target account before deployment.
+3. Extract `week-7-pet-shelter-client.zip` when preparing production migration or hardening work.
+4. Run the package's `setup.sh` when available.
+5. Configure AWS, Cognito, S3, Step Functions, SNS, X-Ray, and frontend `.env` values for your own target account before deployment.
 
-Do not commit `.env` files, AWS credentials, PEM keys, personal endpoint values, local dependency folders, generated build artifacts, or private account identifiers.
+Do not edit or repack `week-7-pet-shelter-client-lab.zip`. Do not commit `.env` files, AWS credentials, PEM keys, personal endpoint values, local dependency folders, generated build artifacts, or private account identifiers.
 
 ---
 
@@ -908,14 +918,15 @@ The Week 7 snapshot adds observability to the reporting-enabled pet shelter appl
 - `phase-7-aws-migration-guide.md` with observability deployment and validation guidance
 
 ### What Was Verified
-- The Week 7 archive is present under `docs/phase-zips/week-7-pet-shelter-client.zip`
+- The finalized lab archive is present under `docs/phase-zips/week-7-pet-shelter-client-lab.zip`
+- The production migration archive is present under `docs/phase-zips/week-7-pet-shelter-client.zip`
 - The package tree contains 73 files and excludes `node_modules`, `.aws-sam`, and session-specific `.env` files
 - `backend/template.yaml` contains the expected API Gateway, Lambda, Step Functions, SNS, Cognito, DynamoDB, IAM, and X-Ray infrastructure
 - `backend/statemachine/report_generation.asl.json` contains retry behavior for `GenerateHTML`
 - The migration guide documents the expected X-Ray, CloudWatch, API Gateway, Lambda, and Step Functions validation checks
 
 ### Summary
-Week 7 turns the reporting-enabled application into an observable serverless workload. The final archive keeps the lab-aligned service-level X-Ray tracing, CloudWatch-friendly logging, retry behavior, SAM-managed observability resources, and reusable environment guidance while removing temporary failure simulations and generated local artifacts.
+Week 7 turns the reporting-enabled application into an observable serverless workload. The final lab archive preserves the completed lab status, while the production migration archive keeps the lab-aligned service-level X-Ray tracing, CloudWatch-friendly logging, retry behavior, SAM-managed observability resources, and reusable environment guidance while removing temporary failure simulations and generated local artifacts.
 
 </details>
 
@@ -929,7 +940,7 @@ Keep upcoming sprint placeholders hidden from rendered README output until that 
 
 ### Remaining Hardening
 
-The current Week 7 package now covers the completed pet shelter read/create flow, Cognito-protected employee review, Step Functions reporting, SNS notification, and X-Ray observability path. The remaining follow-up work is focused on target-account validation and production hardening rather than reshaping the archive.
+The current Week 7 packages now cover the completed pet shelter read/create flow, Cognito-protected employee review, Step Functions reporting, SNS notification, and X-Ray observability path. The finalized lab archive is preserved unchanged; remaining follow-up work should happen against the non-lab production migration package.
 
 - Deploy the Week 7 backend in the target AWS account, seed DynamoDB tables, create or update report/image S3 buckets, confirm the SNS email subscription, configure frontend `.env` values from `.env.example`, and run the documented API, reporting, Cognito, CloudWatch, and X-Ray checks.
 - Replace lab/session defaults before reuse, including callback/logout URLs, report bucket names, notification email, CloudFront preview URLs, stack names, and any frontend environment values.
@@ -951,6 +962,7 @@ The current Week 7 package now covers the completed pet shelter read/create flow
 - [x] `week-4-pet-shelter-client.zip` completed with POST request handling, frontend create integration, validation support, Week 4 migration guide, and IAM/service setup audit
 - [x] `week-5-pet-shelter-client.zip` completed with Cognito employee authentication, protected adoption read requests, Week 5 migration guidance, and IAM/service setup audit notes
 - [x] `week-6-pet-shelter-client.zip` completed with Step Functions report orchestration, report-generation Lambdas, S3 report output, SNS notification, and lab snapshot tree notes
-- [x] `week-7-pet-shelter-client.zip` completed with X-Ray tracing, CloudWatch-friendly logging, Step Functions retry behavior, `.env.example`, and cleaned package contents
+- [x] `week-7-pet-shelter-client-lab.zip` preserved as the finalized Week 7 lab-status archive and marked read-only for future work
+- [x] `week-7-pet-shelter-client.zip` completed as the production migration archive with X-Ray tracing, CloudWatch-friendly logging, Step Functions retry behavior, `.env.example`, and cleaned package contents
 - [x] Weekly sprint log aligned with the completed Week 1 through Week 7 zip coverage
 - [ ] Run target-account production validation for the Week 7 stack, frontend environment, X-Ray traces, CloudWatch logs/alarms, SNS email delivery, and report workflow smoke tests
